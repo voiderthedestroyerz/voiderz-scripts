@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voiderz's scripts — explorer</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0b0d0e; color: #d6e0e6;
+      font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', monospace;
+      font-size: 16px; line-height: 1.5; padding: 1.5rem;
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+      min-height: 100vh;
+    }
+    main {
+      max-width: 750px; width: 100%; background: #111618;
+      border: 1px solid #2c3a3f; padding: 1.8rem 1.8rem 2rem;
+      box-shadow: 0 0 0 1px #1a2428 inset, 0 4px 12px rgba(0, 0, 0, 0.6);
+    }
+    h1, h2 { font-weight: 400; letter-spacing: 0.5px; }
+    h1 {
+      font-size: 1.9rem; color: #9fc9d9; margin-bottom: 1.2rem;
+      border-bottom: 1px solid #2e4a55; padding-bottom: 0.4rem; word-break: break-word;
+    }
+    h2 {
+      font-size: 1.4rem; color: #9fc9d9; margin-top: 2rem;
+      margin-bottom: 1rem; border-bottom: 1px dashed #2e4a55; padding-bottom: 0.4rem;
+    }
+    .socials {
+      margin-bottom: 2rem; display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem;
+      padding-bottom: 1rem; border-bottom: 1px dashed #27424b;
+    }
+    .socials a {
+      color: #b4d9e8; text-decoration: none; border-bottom: 1px dotted #3f6875;
+      font-size: 0.95rem; transition: color 0.1s ease, border-color 0.1s;
+    }
+    .socials a:hover { color: #e3f0f5; border-bottom-color: #9fc9d9; }
+    .footer-note {
+      margin-top: 2.2rem; font-size: 0.85rem; color: #5f7e8b; text-align: center;
+      border-top: 1px solid #1e333b; padding-top: 1rem;
+    }
+    a { color: #9fc9d9; text-decoration: none; border-bottom: 1px dotted #3c6373; }
+    a:hover { color: #d2ecf5; border-bottom-color: #b4d9e8; }
+    
+    .explorer-section { margin-top: 1.5rem; }
+    .explorer-toolbar {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1.2rem;
+      margin-bottom: 1.2rem; padding-bottom: 0.7rem; border-bottom: 1px dashed #27424b;
+      font-size: 0.9rem; color: #8aaebc;
+    }
+    .explorer-toolbar .path { color: #b4d9e8; font-weight: 600; word-break: break-word; }
+    .explorer-toolbar .count { margin-left: auto; color: #5f7e8b; font-size: 0.85rem; }
+    
+    .file-list { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; }
+    .file-item {
+      display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.7rem;
+      border-left: 3px solid #2d5a68; background: #0e1417; border: 1px solid #24353b;
+      border-left-width: 3px; flex-wrap: wrap; transition: background 0.1s ease, border-color 0.1s;
+    }
+    .file-item:hover { background: #121a1e; border-color: #2e4a55; border-left-color: #3f6875; }
+    .file-icon { color: #7aa9b9; font-size: 0.85rem; min-width: 1.4rem; text-align: center; }
+    .file-name { color: #c2dae6; font-weight: 600; word-break: break-word; flex: 1 1 14rem; min-width: 0; }
+    .file-meta { font-size: 0.8rem; color: #8aaebc; margin-left: auto; white-space: nowrap; }
+    
+    .file-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-left: auto; }
+    .file-actions a, .file-actions button {
+      font-family: inherit; font-size: 0.8rem; color: #b4d9e8; background: #111618;
+      border: 1px solid #2e4a55; padding: 0.2rem 0.6rem; text-decoration: none;
+      border-bottom: none; cursor: pointer; transition: background 0.1s, color 0.1s, border-color 0.1s;
+      line-height: 1.4; white-space: nowrap;
+    }
+    .file-actions a:hover, .file-actions button:hover {
+      background: #1a2428; color: #e3f0f5; border-color: #3f6875;
+    }
+    .file-actions .dl { border-color: #2d5a68; color: #9fc9d9; }
+    .file-actions .dl:hover { border-color: #7aa9b9; }
+    
+    .empty-note { color: #5f7e8b; font-size: 0.9rem; font-style: italic; padding: 1rem 0.2rem; }
+    hr { border: none; border-top: 1px solid #1e333b; margin: 1.2rem 0; }
+    
+    @media (max-width: 500px) {
+      body { padding: 0.8rem; }
+      main { padding: 1.2rem; }
+      h1 { font-size: 1.6rem; }
+      .file-item { padding: 0.5rem; }
+      .file-name { flex-basis: 100%; }
+      .file-meta { margin-left: 0; }
+      .file-actions { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Voiderz's scripts</h1>
+
+    <div class="socials">
+      <a href="https://www.youtube.com/@voiderthedestroyer" target="_blank" rel="noopener">youtube</a>
+      <a href="https://github.com/voiderthedestroyerz" target="_blank" rel="noopener">github</a>
+      <a href="https://tiktok.com/@voiderthedestroyer" target="_blank" rel="noopener">tiktok</a>
+      <a href="https://v3rm.net/members/voiderthedestroyer.117749/" target="_blank" rel="noopener">v3rm</a>
+    </div>
+
+    <div class="explorer-section">
+      <h2>explorer</h2>
+
+      <div class="explorer-toolbar">
+        <span class="path">/</span>
+        <span class="count" id="file-count"></span>
+      </div>
+
+      <ul class="file-list" id="file-list"></ul>
+      <div class="empty-note" id="empty-note" hidden>no files in this directory.</div>
+    </div>
+
+    <div class="footer-note">
+      voiderthedestroyer — lightweight af — credits to deepseek for coding the website lol
+    </div>
+  </main>
+
+  <script>
+    /*
+      Directory manifest based on your root Netlify deploy.
+      Since Netlify flattened the folder, all paths start with "/"
+    */
+    const manifest = [
+      { name: "[MESSAGE] Voiderz messages", path: "/[message]voiderz messages", kind: "file", size: "145 B" },
+      { name: "[SPAM] Anonymous",           path: "/[spam]anonymous",           kind: "file", size: "1.4 KB" },
+      { name: "[SPAM] C00lify",             path: "/[spam]c00lify",             kind: "file", size: "1.6 KB" },
+      { name: "[SPAM] Java 1x3x5x6",        path: "/[spam]java 1x3x5x6",        kind: "file", size: "1.4 KB" },
+      { name: "ato.lua",                    path: "/ato.lua",                    kind: "file", size: "79.4 KB" },
+      { name: "bootloader.lua",             path: "/bootloader.lua",             kind: "file", size: "21.5 KB" },
+      { name: "bricks.lua",                 path: "/bricks.lua",                 kind: "file", size: "7.9 KB" },
+      { name: "c00lgui reborn.txt",         path: "/c00lgui reborn.txt",         kind: "file", size: "922.7 KB" },
+      { name: "ghostadmcracked.lua",        path: "/ghostadmcracked.lua",        kind: "file", size: "63 B" },
+      { name: "projectmoon.lua",            path: "/projectmoon.lua",            kind: "file", size: "35.2 KB" },
+      { name: "stigma.lua",                 path: "/stigma.lua",                 kind: "file", size: "84.7 KB" },
+      { name: "ultimatevulnerablehub.lua",  path: "/ultimatevulnerablehub.lua",  kind: "file", size: "2.6 KB" },
+      { name: "v01derzadmin.lua",           path: "/v01derzadmin.lua",           kind: "file", size: "43.3 KB" },
+      { name: "voiderzfetrollinggui.lua",   path: "/voiderzfetrollinggui.lua",   kind: "file", size: "44.1 KB" }
+    ];
+
+    function fmtIcon(kind) { return kind === "folder" ? "▸" : "•"; }
+    function fmtName(item) {
+      const tag = item.kind === "folder" ? '<span class="tag">[dir]</span>' : '';
+      return item.name + tag;
+    }
+
+    function renderList() {
+      const list = document.getElementById("file-list");
+      const empty = document.getElementById("empty-note");
+      const countEl = document.getElementById("file-count");
+
+      list.innerHTML = "";
+      if (!manifest.length) {
+        empty.hidden = false; countEl.textContent = ""; return;
+      }
+
+      empty.hidden = true;
+      countEl.textContent = manifest.length + " item" + (manifest.length === 1 ? "" : "s");
+
+      const sorted = [...manifest].sort((a, b) => {
+        if (a.kind !== b.kind) return a.kind === "folder" ? -1 : 1;
+        return a.name.localeCompare(b.name);
+      });
+
+      for (const item of sorted) {
+        const li = document.createElement("li");
+        li.className = "file-item" + (item.kind === "folder" ? " folder-item" : "");
+
+        const icon = document.createElement("span");
+        icon.className = "file-icon";
+        icon.textContent = fmtIcon(item.kind);
+        icon.setAttribute("aria-hidden", "true");
+
+        const name = document.createElement("span");
+        name.className = "file-name";
+        name.innerHTML = fmtName(item);
+
+        const meta = document.createElement("span");
+        meta.className = "file-meta";
+        meta.textContent = item.size || "";
+
+        const actions = document.createElement("span");
+        actions.className = "file-actions";
+
+        const safeUrl = encodeURI(item.path);
+
+        const view = document.createElement("a");
+        view.href = safeUrl; view.target = "_blank"; view.rel = "noopener"; view.textContent = "view";
+        actions.appendChild(view);
+
+        if (item.kind !== "folder") {
+          const dl = document.createElement("a");
+          dl.href = safeUrl; dl.download = item.name; dl.className = "dl"; dl.textContent = "download";
+          actions.appendChild(dl);
+
+          const copy = document.createElement("button");
+          copy.type = "button"; copy.textContent = "copy url";
+          copy.addEventListener("click", async () => {
+            const url = new URL(safeUrl, window.location.origin).href;
+            try {
+              await navigator.clipboard.writeText(url);
+              copy.textContent = "copied!";
+              setTimeout(() => { copy.textContent = "copy url"; }, 1200);
+            } catch {
+              const ta = document.createElement("textarea");
+              ta.value = url; document.body.appendChild(ta); ta.select();
+              try { document.execCommand("copy"); } catch {}
+              document.body.removeChild(ta);
+              copy.textContent = "copied?";
+              setTimeout(() => { copy.textContent = "copy url"; }, 1200);
+            }
+          });
+          actions.appendChild(copy);
+        }
+
+        li.appendChild(icon);
+        li.appendChild(name);
+        li.appendChild(meta);
+        li.appendChild(actions);
+        list.appendChild(li);
+      }
+    }
+
+    renderList();
+  </script>
+</body>
+</html>
