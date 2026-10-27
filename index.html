@@ -105,7 +105,7 @@
       <h2>explorer</h2>
 
       <div class="explorer-toolbar">
-        <span class="path">/</span>
+        <span class="path">/scripts</span>
         <span class="count" id="file-count"></span>
       </div>
 
@@ -120,24 +120,24 @@
 
   <script>
     /*
-      Directory manifest based on your root Netlify deploy.
-      Since Netlify flattened the folder, all paths start with "/"
+      Directory manifest based on GitHub folder structure.
+      All paths start with "/scripts/"
     */
     const manifest = [
-      { name: "[MESSAGE] Voiderz messages", path: "/[message]voiderz messages", kind: "file", size: "145 B" },
-      { name: "[SPAM] Anonymous",           path: "/[spam]anonymous",           kind: "file", size: "1.4 KB" },
-      { name: "[SPAM] C00lify",             path: "/[spam]c00lify",             kind: "file", size: "1.6 KB" },
-      { name: "[SPAM] Java 1x3x5x6",        path: "/[spam]java 1x3x5x6",        kind: "file", size: "1.4 KB" },
-      { name: "ato.lua",                    path: "/ato.lua",                    kind: "file", size: "79.4 KB" },
-      { name: "bootloader.lua",             path: "/bootloader.lua",             kind: "file", size: "21.5 KB" },
-      { name: "bricks.lua",                 path: "/bricks.lua",                 kind: "file", size: "7.9 KB" },
-      { name: "c00lgui reborn.txt",         path: "/c00lgui reborn.txt",         kind: "file", size: "922.7 KB" },
-      { name: "ghostadmcracked.lua",        path: "/ghostadmcracked.lua",        kind: "file", size: "63 B" },
-      { name: "projectmoon.lua",            path: "/projectmoon.lua",            kind: "file", size: "35.2 KB" },
-      { name: "stigma.lua",                 path: "/stigma.lua",                 kind: "file", size: "84.7 KB" },
-      { name: "ultimatevulnerablehub.lua",  path: "/ultimatevulnerablehub.lua",  kind: "file", size: "2.6 KB" },
-      { name: "v01derzadmin.lua",           path: "/v01derzadmin.lua",           kind: "file", size: "43.3 KB" },
-      { name: "voiderzfetrollinggui.lua",   path: "/voiderzfetrollinggui.lua",   kind: "file", size: "44.1 KB" }
+      { name: "[MESSAGE] Voiderz messages", path: "/scripts/[message]voiderz messages", kind: "file", size: "145 B" },
+      { name: "[SPAM] Anonymous",           path: "/scripts/[spam]anonymous",           kind: "file", size: "1.4 KB" },
+      { name: "[SPAM] C00lify",             path: "/scripts/[spam]c00lify",             kind: "file", size: "1.6 KB" },
+      { name: "[SPAM] Java 1x3x5x6",        path: "/scripts/[spam]java 1x3x5x6",        kind: "file", size: "1.4 KB" },
+      { name: "ato.lua",                    path: "/scripts/ato.lua",                    kind: "file", size: "79.4 KB" },
+      { name: "bootloader.lua",             path: "/scripts/bootloader.lua",             kind: "file", size: "21.5 KB" },
+      { name: "bricks.lua",                 path: "/scripts/bricks.lua",                 kind: "file", size: "7.9 KB" },
+      { name: "c00lgui reborn.txt",         path: "/scripts/c00lgui reborn.txt",         kind: "file", size: "922.7 KB" },
+      { name: "ghostadmcracked.lua",        path: "/scripts/ghostadmcracked.lua",        kind: "file", size: "63 B" },
+      { name: "projectmoon.lua",            path: "/scripts/projectmoon.lua",            kind: "file", size: "35.2 KB" },
+      { name: "stigma.lua",                 path: "/scripts/stigma.lua",                 kind: "file", size: "84.7 KB" },
+      { name: "ultimatevulnerablehub.lua",  path: "/scripts/ultimatevulnerablehub.lua",  kind: "file", size: "2.6 KB" },
+      { name: "v01derzadmin.lua",           path: "/scripts/v01derzadmin.lua",           kind: "file", size: "43.3 KB" },
+      { name: "voiderzfetrollinggui.lua",   path: "/scripts/voiderzfetrollinggui.lua",   kind: "file", size: "44.1 KB" }
     ];
 
     function fmtIcon(kind) { return kind === "folder" ? "▸" : "•"; }
